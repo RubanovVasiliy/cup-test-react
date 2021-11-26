@@ -11,9 +11,12 @@ interface MarketRatesOutputDto {
     EUR: number,
 }
 
+export type IError = string | null
+
+
 export interface MarketState {
     market: MarketStateOutputDto,
-    error: string | null
+    error: IError
 }
 
 

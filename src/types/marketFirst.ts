@@ -4,6 +4,8 @@ export enum MarketFirstActionTypes {
     FETCH_FIRST_MARKET = "FETCH_FIRST_MARKET",
     FETCH_FIRST_MARKET_SUCCESS = "FETCH_FIRST_MARKET_SUCCESS",
     FETCH_FIRST_MARKET_ERROR = "FETCH_FIRST_MARKET_ERROR",
+    START_POLLING_FIRST_MARKET = "START_POLLING_FIRST_MARKET",
+    STOP_POLLING_FIRST_MARKET = "STOP_POLLING_FIRST_MARKET",
 }
 
 interface FetchFirstMarketAction {
@@ -20,4 +22,13 @@ interface FetchFirstMarketErrorAction {
     payload: string
 }
 
-export type FirstMarketAction = FetchFirstMarketAction | FetchFirstMarketSuccessAction | FetchFirstMarketErrorAction
+interface StartPollingFirstMarketAction {
+    type: MarketFirstActionTypes.START_POLLING_FIRST_MARKET,
+}
+
+interface StopPollingFirstMarketAction {
+    type: MarketFirstActionTypes.STOP_POLLING_FIRST_MARKET,
+}
+
+export type FirstMarketAction = FetchFirstMarketAction | FetchFirstMarketSuccessAction
+    | FetchFirstMarketErrorAction | StartPollingFirstMarketAction | StopPollingFirstMarketAction

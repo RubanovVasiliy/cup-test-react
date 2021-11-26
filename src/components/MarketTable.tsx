@@ -7,11 +7,10 @@ import 'antd/dist/antd.css';
 
 const MarketTable: FC = () => {
     const state = useTypedSelector(state => state.first)
-    const {fetchMarketFirst,fetchMarketFirstPoll} = useActions()
+    const {fetchMFAC} = useActions()
 
     useEffect(() => {
-        //fetchMarketFirst()
-        fetchMarketFirstPoll()
+        fetchMFAC()
     }, [])
 
     const dataSource = [

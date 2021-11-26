@@ -20,7 +20,7 @@ export const marketFirstReducer = (state = initialState, action: FirstMarketActi
         case MarketFirstActionTypes.FETCH_FIRST_MARKET:
             return {...state}
         case MarketFirstActionTypes.FETCH_FIRST_MARKET_SUCCESS:
-            return {...state, market: action.payload}
+            return {...state, market:action.payload}
         case MarketFirstActionTypes.FETCH_FIRST_MARKET_ERROR:
             return {...state, error: action.payload}
         default:
