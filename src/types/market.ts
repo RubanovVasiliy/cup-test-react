@@ -12,7 +12,9 @@ interface MarketRatesOutputDto {
 }
 
 export interface MarketState {
-    market: MarketStateOutputDto,
+    first: MarketStateOutputDto,
+    second: MarketStateOutputDto,
+    third: MarketStateOutputDto,
     error: string | null
 }
 

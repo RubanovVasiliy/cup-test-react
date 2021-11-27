@@ -1,13 +1,15 @@
 import {Dispatch} from "redux";
-import {FirstMarketAction, MarketFirstActionTypes} from "../../types/marketFirst";
+import {FirstMarketAction, MarketFirstActionTypes, SourceType} from "../../types/marketFirst";
 import axios from "axios";
-import {marketFirstPollURL, marketFirstURL} from "../../URLs";
+import {URLs} from "../../URLs";
 
-export const fetchMarketFirst = () => {
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
+
+export const fetchMarketFirst = (url: URLs,) => {
     return async (dispatch: Dispatch<FirstMarketAction>) => {
         try {
             dispatch({type: MarketFirstActionTypes.FETCH_FIRST_MARKET})
-            const {data} = await axios.get(marketFirstURL)
+            const {data} = await axios.get(url)
             dispatch({type: MarketFirstActionTypes.FETCH_FIRST_MARKET_SUCCESS, payload: data})
         } catch (e) {
             dispatch({type: MarketFirstActionTypes.FETCH_FIRST_MARKET_ERROR, payload: "Error loading market first"})
@@ -15,15 +17,26 @@ export const fetchMarketFirst = () => {
     }
 }
 
-export const fetchMarketFirstPoll = () => {
+export const fetchMarketFirstPoll = (url: URLs, source: SourceType) => {
     return async (dispatch: Dispatch<FirstMarketAction>) => {
-        try {
-            dispatch({type: MarketFirstActionTypes.FETCH_FIRST_MARKET})
-            const {data} = await axios.get(marketFirstPollURL)
-            dispatch({type: MarketFirstActionTypes.FETCH_FIRST_MARKET_SUCCESS, payload: data})
-            await fetchMarketFirstPoll()
-        } catch (e) {
-            dispatch({type: MarketFirstActionTypes.FETCH_FIRST_MARKET_ERROR, payload: "Error loading market first poll"})
+        while (true) {
+            try {
+                dispatch({type: MarketFirstActionTypes.FETCH_FIRST_MARKET})
+                const {data} = await axios.get(url)
+                dispatch({
+                    type: MarketFirstActionTypes.FETCH_FIRST_MARKET_SUCCESS,
+                    payload: {data: data, source: source}
+                })
+            } catch (e) {
+                dispatch({
+                    type: MarketFirstActionTypes.FETCH_FIRST_MARKET_ERROR,
+                    payload: "Error loading market first poll"
+                })
+                await delay(5000)
+                await fetchMarketFirstPoll(url, source)
+            }
         }
     }
 }
+
+

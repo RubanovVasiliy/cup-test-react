@@ -2,7 +2,27 @@ import {MarketState} from "../../types/market";
 import {FirstMarketAction, MarketFirstActionTypes} from "../../types/marketFirst";
 
 const initialState: MarketState = {
-    market: {
+    first: {
+        rates: {
+            RUB: 0,
+            USD: 0,
+            EUR: 0,
+        },
+        base: '',
+        timestamp: 0,
+        date: '',
+    },
+    second: {
+        rates: {
+            RUB: 0,
+            USD: 0,
+            EUR: 0,
+        },
+        base: '',
+        timestamp: 0,
+        date: '',
+    },
+    third: {
         rates: {
             RUB: 0,
             USD: 0,
@@ -20,7 +40,7 @@ export const marketFirstReducer = (state = initialState, action: FirstMarketActi
         case MarketFirstActionTypes.FETCH_FIRST_MARKET:
             return {...state}
         case MarketFirstActionTypes.FETCH_FIRST_MARKET_SUCCESS:
-            return {...state, market: action.payload}
+            return {...state, [action.payload.source]: action.payload.data}
         case MarketFirstActionTypes.FETCH_FIRST_MARKET_ERROR:
             return {...state, error: action.payload}
         default:
