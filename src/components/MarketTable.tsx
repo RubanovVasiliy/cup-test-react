@@ -8,12 +8,15 @@ import {URLs} from "../URLs";
 
 const MarketTable: FC = () => {
     const state = useTypedSelector(state => state.first)
-    const {fetchMarketFirstPoll} = useActions()
+    const {fetchMarket, fetchMarketPoll} = useActions()
 
     useEffect(() => {
-        fetchMarketFirstPoll(URLs.marketFirstPollURL, "first")
+        fetchMarket(URLs.marketFirstURL, "first")
+        fetchMarket(URLs.marketSecondURL, "second")
+        fetchMarket(URLs.marketThirdURL, "third")
+        fetchMarketPoll(URLs.marketFirstPollURL, "first")
         //fetchMarketFirstPoll(URLs.marketSecondPollURL, "second")
-        fetchMarketFirstPoll(URLs.marketThirdPollURL, "third")
+        fetchMarketPoll(URLs.marketThirdPollURL, "third")
     }, [])
 
 

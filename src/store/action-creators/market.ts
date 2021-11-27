@@ -5,7 +5,7 @@ import {URLs} from "../../URLs";
 
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
 
-export const fetchMarketFirst = (url: URLs, source: SourceType) => {
+export const fetchMarket = (url: URLs, source: SourceType) => {
     return async (dispatch: Dispatch<FirstMarketAction>) => {
         try {
             dispatch({type: MarketActionTypes.FETCH_MARKET})
@@ -17,7 +17,7 @@ export const fetchMarketFirst = (url: URLs, source: SourceType) => {
     }
 }
 
-export const fetchMarketFirstPoll = (url: URLs, source: SourceType) => {
+export const fetchMarketPoll = (url: URLs, source: SourceType) => {
     return async (dispatch: Dispatch<FirstMarketAction>) => {
         while (true) {
             try {
@@ -33,7 +33,7 @@ export const fetchMarketFirstPoll = (url: URLs, source: SourceType) => {
                     payload: "Error loading market poll"
                 })
                 await delay(5000)
-                await fetchMarketFirstPoll(url, source)
+                await fetchMarketPoll(url, source)
             }
         }
     }
