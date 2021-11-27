@@ -12,7 +12,7 @@ const MarketTable: FC = () => {
 
     useEffect(() => {
         fetchMarketFirstPoll(URLs.marketFirstPollURL, "first")
-        fetchMarketFirstPoll(URLs.marketSecondPollURL, "second")
+        //fetchMarketFirstPoll(URLs.marketSecondPollURL, "second")
         fetchMarketFirstPoll(URLs.marketThirdPollURL, "third")
     }, [])
 

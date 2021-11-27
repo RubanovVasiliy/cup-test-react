@@ -1,5 +1,5 @@
 import {MarketState} from "../../types/market";
-import {FirstMarketAction, MarketFirstActionTypes} from "../../types/marketFirst";
+import {FirstMarketAction, MarketActionTypes} from "../../types/market";
 
 const initialState: MarketState = {
     first: {
@@ -35,13 +35,13 @@ const initialState: MarketState = {
     error: null
 }
 
-export const marketFirstReducer = (state = initialState, action: FirstMarketAction): MarketState => {
+export const marketReducer = (state = initialState, action: FirstMarketAction): MarketState => {
     switch (action.type) {
-        case MarketFirstActionTypes.FETCH_FIRST_MARKET:
+        case MarketActionTypes.FETCH_MARKET:
             return {...state}
-        case MarketFirstActionTypes.FETCH_FIRST_MARKET_SUCCESS:
-            return {...state, [action.payload.source]: action.payload.data}
-        case MarketFirstActionTypes.FETCH_FIRST_MARKET_ERROR:
+        case MarketActionTypes.FETCH_MARKET_SUCCESS:
+            return {...state, [action.payload.source]: action.payload.data, error: null}
+        case MarketActionTypes.FETCH_MARKET_ERROR:
             return {...state, error: action.payload}
         default:
             return state

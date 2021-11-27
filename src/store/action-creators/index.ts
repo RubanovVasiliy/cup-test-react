@@ -1,4 +1,4 @@
-import * as MarketFirstActionCreator from './marketFirst'
+import * as MarketFirstActionCreator from './market'
 
 export default {
     ...MarketFirstActionCreator

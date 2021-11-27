@@ -1,8 +1,8 @@
 import {combineReducers} from "redux";
-import {marketFirstReducer} from "./marketFirstReducer";
+import {marketReducer} from "./marketReducer";
 
 export const rootReducer = combineReducers({
-    first: marketFirstReducer
+    first: marketReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>
